@@ -1,7 +1,10 @@
 from wechatsogou.api import WechatSogouAPI
+from pymongo import MongoClient
 import json
 
+
 api = WechatSogouAPI()
+db = MongoClient('t.yangio.com', 7077)
 
 gzhList = ["周末酒店"]
 
@@ -17,4 +20,4 @@ def getGzhArticles():
 
 
 
-getGzhArticles()
+# getGzhArticles()
