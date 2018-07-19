@@ -412,6 +412,16 @@ class WechatSogouAPI(object):
         resp.encoding = 'utf-8'
         return WechatSogouStructuring.get_gzh_article_by_hot(resp.text)
 
+    def get_article_content_head(self, url):
+        resp = self.__get_by_unlock(url,
+                                    unlock_platform=self.__unlock_wechat,
+                                    unlock_callback=None,
+                                    identify_image_callback=None)
+        resp.encoding = 'utf-8'
+        if '链接已过期' in resp.text:
+            raise WechatSogouException('get_article_content_head 链接 [{}] 已过期'.format(url))
+        return WechatSogouStructuring.get_article_detail_head(resp.text)
+
     def get_article_content(self, url, del_qqmusic=True, del_mpvoice=True, unlock_callback=None,
                             identify_image_callback=None, hosting_callback=None):
         """获取文章原文，避免临时链接失效

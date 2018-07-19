@@ -527,3 +527,14 @@ class WechatSogouStructuring(object):
             'content_html': content_html,
             'content_img_list': all_img_list
         }
+
+    @staticmethod
+    def get_article_detail_head(text):
+        # 1. 获取微信文本content
+        html_obj = BeautifulSoup(text, "lxml")
+        noReferrerMeta = html_obj.new_tag("meta")
+        noReferrerMeta["name"] = "referrer"
+        noReferrerMeta["content"] = "never"
+        html_obj.head.append(noReferrerMeta)
+
+        return str(html_obj)

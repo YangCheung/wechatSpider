@@ -1,7 +1,6 @@
 from wechatsogou.api import WechatSogouAPI
-import FileStorage
-import storage
-import FileStorage
+from spider.storage import *
+from spider.FileStorage import *
 import json
 import time
 
@@ -24,21 +23,22 @@ def getGzhArticles():
 
         articles = info.get("article")
         for article in articles:
-            articleContent = api.get_article_content(article.get("content_url"), hosting_callback = hostingImage)
-            saveArticles(article, articleContent["content_html"])
+            article["wechat_id"] = gzh["wechat_id"]
+            articleContent = api.get_article_content_head(article.get("content_url"))
+            saveArticles(article, articleContent)
 
 def saveArticles(article, html):
     print(html)
-    url = FileStorage.saveHtmlToServer(html)
+    url = saveHtmlToServer(html)
 
     article["content_url"] = url
-    storage.saveArticle(article)
+    saveArticleToServer(article)
 
 def hostingImage(url):
-    return FileStorage.saveToServer(url)    
+    return saveToServer(url)    
 
 def saveGzhInfo(info):
-    storage.saveGzhInfo(info)
+    saveGzhInfoToServer(info)
 
 
 getGzhArticles()

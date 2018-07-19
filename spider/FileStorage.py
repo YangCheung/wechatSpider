@@ -16,7 +16,7 @@ def saveHtmlToServer(html):
     with tempfile.NamedTemporaryFile('w+', delete=False) as f:
         f.write(html)
         
-    key = str(uuid.uuid1())
+    key = "%s.html"%str(uuid.uuid1())
     # token = generateToken()
     localfile = f.name
     ret, resp = put_file(token, key, localfile)
