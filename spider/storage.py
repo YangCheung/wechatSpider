@@ -16,15 +16,20 @@ def saveGzhInfoToServer(info):
         gzh.set("headimage", info.get("headimage"))
         gzh.save()
 
-def saveArticleToServer(article):
+def saveArticleToServer(article, htmlSaver = None):
     ArticleInfo = leancloud.Object.extend('Article')
     query1 = ArticleInfo.query.equal_to("fileid", article["fileid"])
     query2 = ArticleInfo.query.equal_to("wechat_id", article["wechat_id"])
     result = leancloud.Query.and_(query1,query2)
+    count = 0
     try:
         result.first()
+        # print("ignore %s %s"%article["wechat_id"],article["title"])
     except leancloud.errors.LeanCloudError as e:
+        if htmlSaver and article["html"]:
+            url = htmlSaver(article["html"])
         articleModel = ArticleInfo()
+        articleModel["content_url"] = url
         articleModel.set("fileid", article.get("fileid"))
         articleModel.set("wechat_id", article.get("wechat_id"))
         articleModel.set("datetime", article.get("datetime"))
@@ -35,3 +40,6 @@ def saveArticleToServer(article):
         articleModel.set("cover", article.get("cover"))
         articleModel.set("content_url", article.get("content_url"))
         articleModel.save()
+        count = 1
+        print("saved %s %s"%(articleModel["wechat_id"],articleModel["title"]))
+    return count
