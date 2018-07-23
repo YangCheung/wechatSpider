@@ -1,0 +1,191 @@
+*{
+    padding:0;
+    margin:0;
+    -webkit-tap-highlight-color:rgba(0,0,0,0)
+}
+body,html{
+    width:100%;
+    height:100%
+}
+body{
+    margin:0 auto;
+    max-width:750px;
+    min-height:100%;
+    line-height:1;
+    opacity:1;
+    will-change:opacity;
+    -webkit-transition:opacity .2s ease-in-out;
+    transition:opacity .2s ease-in-out;
+}
+body.active{
+    opacity:1
+}
+body.open-in-ios-wechat .container{
+    display:none
+}
+body.open-in-ios-wechat .ios-wechat-tip{
+    position:relative;
+    display:block
+}
+body.open-in-ios-wechat .ios-wechat-tip a{
+    position:absolute;
+    right:.34rem;
+    bottom:.56rem;
+    width:2.7rem;
+    height:.7rem
+}
+body.open-in-ios-wechat .guide-title{
+    display:block
+}
+body.open-in-ios-browser .container{
+    display:none
+}
+body.open-in-ios-browser .guide-title,body.open-in-ios-browser .ios-browser-tip{
+    display:block
+}
+body.open-in-browser .container{
+    display:none
+}
+body.open-in-android-wechat .android-wechat-tip,body.open-in-android-wechat .guide-title{
+    display:block
+}
+body.open-in-android-browser .container{
+    display:none
+}
+body.open-in-android-browser .android-browser-tip,body.open-in-android-browser .guide-title{
+    display:block
+}
+body.android .android,body.ios .ios{
+    display:-webkit-box;
+    display:-webkit-flex;
+    display:-ms-flexbox;
+    display:flex
+}
+.container{
+    width:7.5rem;
+    overflow:hidden
+}
+.button{
+    position:absolute;
+    width:4.3rem;
+    height:.92rem;
+    left:50%;
+    margin-left:-2.15rem;
+    -webkit-appearance:none;
+    background:transparent;
+    border:0
+}
+.button-1{
+    top:4.47rem
+}
+.button-2{
+    top:63.67rem
+}
+.guide-tips{
+    display:none;
+    width:7.5rem;
+    margin:0 auto;
+    -webkit-align-self:flex-start;
+    -ms-flex-item-align:start;
+    align-self:flex-start;
+    background-color:#14141F;
+
+    height:100%
+}
+/* .guide-tips img{
+    width:100%
+} */
+.guide-img{
+    width:100%
+}
+body .guide-img{
+    display:block
+}
+body .guide-img-titled,body.titled .guide-img{
+    display:none
+}
+body.titled .guide-img-titled{
+    display:block
+}
+.go-appstore{
+    display:block;
+    bottom:10px;
+    position: absolute; 
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 0
+}
+.browser-tip .go-appstore{
+    display:block;
+    top:1.5rem;
+    position: absolute; 
+    width: 50%;
+    margin-left: 25%;
+    margin-bottom: 0
+}
+/* @media screen and (min-height:668px){
+    .ios-go-appstore{
+        top:10.8rem
+    }
+} */
+.guide-title{
+    width:7.5rem;
+    -webkit-align-self:auto;
+    -ms-flex-item-align:auto;
+    align-self:auto;
+    position:absolute;
+    top:6.2rem;
+    display:none
+}
+.guide-title p{
+    line-height:.52rem;
+    font-size:.36rem;
+    color:#666;
+    margin:0 auto;
+    width:4.5rem
+}
+.img-loaded img{
+    width:100%
+}
+.placeholder-0{
+    width:7.5rem;
+    height:17.5rem
+}
+.placeholder-1{
+    width:7.5rem;
+    height:12.8rem
+}
+.placeholder-2{
+    width:7.5rem;
+    height:11.43rem
+}
+.placeholder-3{
+    width:7.5rem;
+    height:11.88rem
+}
+.placeholder-4{
+    width:7.5rem;
+    height:13.12rem
+}
+.fixed-tip{
+    display:none;
+    position:absolute;
+    top:.4rem;
+    font-size:.26rem;
+    text-align:center;
+    width:7.5rem;
+    line-height:.4rem;
+    color:#f8f8f8
+}
+.fixed-tip:before{
+    position:absolute;
+    top:-.28rem;
+    content:"";
+    width:.21rem;
+    height:.22rem;
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAWCAYAAAFYhOeuAAAABGdBTUEAALGPC/xhBQAAAcNJREFUOBGdVbtOAzEQjEkoAiUpEVUa+AGUL0C0kRB0FPQoDR1CIS0F+QEKanQtgh/g8QNQ0NIhSmhQgBnH4/P5fLkoK/l2d3Z2zvb57hqNwAzjPxj9Ei+wc4wNG/kLKTQCLQyWj5h4m9anDIJkyQ4U0BsweaezEEQ88jkItz5hAGDg9Ae2gKTjALmO7wAyVKL15YAxQ87AA2KWPEiZE89KRQEg9Bwpdj1xtOCJgBm+aScsAtUR7yiHvzfGPCrX6lYBnAhM+As0fZVwqHMT841zjHgKfFiaexNKv1LSeVEuEvMw9geLD/JbbPkQs4oA3lBsixD4tqvZI6GnA6zSstRidPJGsxYjEu8exoXFnAZzsyEm4jEt5hiV8G1QTwtk1uwbsQ+/qUqFf63AcxiK3KIHDBp9ahvzhroIAmMqJeyyrrdUh0gfY5IQCyHW+6XmGACpi/ERds4Rk9+NtXguw32bQydJyfcb5ap9S3bOAY4LRzleAgR2gW3HOPInHPO7BG6hpCjEtlDdw0jWnRj/BjcQf3G5d4UmiK2hwr/FimfUB/xOXEH8U1QrCrFlAIcY6yos4N/Rcw3xH36bq/ZtAV3b8vwP5rUdWDZFxxAAAAAASUVORK5CYII=) no-repeat;
+    background-size:cover
+}
+.fixed-tip b{
+    font-family:PingFangTC-Semibold,sans-serif
+}

@@ -5,7 +5,7 @@
     } else if (typeof exports === 'object') {
         module.exports = factory();
     } else {
-        root.nativeSchema = factory();
+        root.mobile = factory();
     }
 }(this, function(){
     var browser = {
@@ -24,22 +24,11 @@
         }
     };
 
-    var AppConfig = {
-        PROTOCAL:"mobu-web",
-        HOME: "https://oia.gomoboo.com",
-        FAILBACK: {
-            ANDROID: "http://a.app.qq.com/o/simple.jsp?pkgname=com.shellcolr.cosmos",
-            IOS: "https://itunes.apple.com/us/app/%E9%AD%94%E9%83%A8/id1383707003?mt=8"
-        },
-        APK_INFO: {
-            PKG: "com.shellcolr.cosmos",
-            CATEGORY: "android.intent.category.DEFAULT",
-            ACTION: "android.intent.action.VIEW"
-        },
-        LOAD_WAITING: 1000
-    };
-
     var ua = window.navigator.userAgent;
+
+    var appStore = "https://itunes.apple.com/cn/app/%E9%AD%94%E9%83%A8/id1383707003?mt=8";
+    var androidStore = "http://a.app.qq.com/o/simple.jsp?pkgname=com.shellcolr.cosmos";
+
 
     // 是否为Android下的chrome浏览器，排除mobileQQ；
     // Android下的chrome，需要通过特殊的intent 来唤醒
@@ -47,18 +36,31 @@
     var isAndroidChrome = (ua.match(/Chrome\/([\d.]+)/) || ua.match(/CriOS\/([\d.]+)/))
                           && browser.isAndroid() && !browser.isMobileQQ();
 
-    return {
-        shareData: function(title, desc, iconUrl) {
-            if (browser.isIOS()) {
-                window.webkit.messageHandlers.mbshare.postMessage({title, desc, iconUrl});
+    var downloadElement = document.querySelector(".go-appstore");
+    var targetAppStore = androidStore
+    window.goAppStore = function() {
+        window.location.href = targetAppStore
+    }
+    // downloadElement.addEventListener("click", goAppStore, false);
+
+    var setup = function() {
+        if (browser.isIOS()) {
+            targetAppStore = appStore
+            if(browser.isWx()) {
+                document.body.classList.add("open-in-ios-wechat")
             } else {
-                MbShare.enable(title, desc, iconUrl)
+                document.body.classList.add("open-in-ios-browser")
             }
-        },
-        /**
-         * [generateSchema 根据不同的场景及UA生成最终应用的schema]
-         * @return {[type]}                [description]
-         */
+        } else {
+            if(browser.isWx()) {
+                document.body.classList.add("open-in-android-wechat")
+            } else {
+                document.body.classList.add("open-in-android-browser")
+            }
+        }
+    }
+    setup();
+    return {
         generateSchema: function(targetUrl) {
             var localUrl  = window.location.href;
             var targetUrlStr = '';
@@ -86,10 +88,7 @@
             return targetUrlStr;
         },
 
-        /**
-         * [loadSchema 唤醒native App，如果无法唤醒，则跳转到下载页]
-         * @return {[type]} [description]
-         */
+    
         loadSchema: function(targetUri){
             var schemaUrl = this.generateSchema(targetUri);
 

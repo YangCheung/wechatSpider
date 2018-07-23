@@ -26,10 +26,10 @@ def saveArticleToServer(article, htmlSaver = None):
         result.first()
         # print("ignore %s %s"%article["wechat_id"],article["title"])
     except leancloud.errors.LeanCloudError as e:
+        articleModel = ArticleInfo()
         if htmlSaver and article["html"]:
             url = htmlSaver(article["html"])
-        articleModel = ArticleInfo()
-        articleModel["content_url"] = url
+            articleModel.set("content_url", url)
         articleModel.set("fileid", article.get("fileid"))
         articleModel.set("wechat_id", article.get("wechat_id"))
         articleModel.set("datetime", article.get("datetime"))
@@ -41,5 +41,5 @@ def saveArticleToServer(article, htmlSaver = None):
         articleModel.set("content_url", article.get("content_url"))
         articleModel.save()
         count = 1
-        print("saved %s %s"%(articleModel["wechat_id"],articleModel["title"]))
+        print("saved %s %s"%(article["wechat_id"],article["title"]))
     return count

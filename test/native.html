@@ -6,7 +6,7 @@
         <meta name="format-detection" content="telephone=no"/>
         <meta name="apple-mobile-web-app-capable" content="no">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <title>测试h5 开客户端</title>
+        <title>测试H5打开客户端</title>
         <style type="text/css">
             html,body{
                 max-width:750px;
@@ -16,45 +16,27 @@
         </style>
     </head>
     <body>
-        <h3>浏览器中打开魔部</h3>
-<br>
-<br>
-<br>
-        <a href="mobu-web://external?target=http%3A%2F%2Fbaidu.com"> 直接使用sheme（Android 非Chrome浏览器） </a>
-<br>
-<br>
-<br>        
-
-
-        <button id="openNN">通过魔部打开baidu</button><br/>
-
-        <br>
-        <br> 
-        <button id="opencircle">打开魔部某个圈子</button><br/>
-
-        <br>
-        <br> 
-        <button id="share">显示分享按钮</button><br/>
+        <br><br><h3>从外部浏览器中打开魔部</h3><br><br>
+        <button id="openNN">通过魔部打开baidu</button><br/><br>
+        <button id="opencircle">打开魔部某个圈子</button><br/><br><br>
+        <h3>----------------------------------------------------</h3>
         
-        <script type="text/javascript" src="tool-nativeSchema.js?v=20160712"></script>
+        <script type="text/javascript" src="tool-nativeSchema.js?dsssssff"></script>
         <script type="text/javascript">
         document.querySelector("#openNN").addEventListener("click",function(){
-            var login = "login";
-            nativeSchema.loadSchema({
-                targetUrl: "http://baidu.com"
-            });
+            nativeSchema.loadSchema("http://baidu.com");
         });
 
         document.querySelector("#opencircle").addEventListener("click",function(){
-            var login = "login";
-            nativeSchema.loadSchema({
-                targetUrl: "mobu://circle/3389805"
-            });
+            nativeSchema.loadSchema("mobu://circle/3389805");
         });
 
-        document.querySelector("#share").addEventListener("click",function(){
-            share.enable("分享标题", "分享描述", "http://baidu.com")
-        });
+        // window.onload = function() {
+        //     nativeSchema.shareData(
+        //         title = "分享的标题分享的标题分享的标题分享的标题分享的标题", 
+        //         desc = "内容描述内容描述内容描述内容描述", 
+        //         iconUrl = "https://ss1.baidu.com/6ONXsjip0QIZ8tyhnq/it/u=594333799,2446165015&fm=173&app=25&f=JPEG?w=640&h=427&s=CDC5E90C476336A25DA04D0B0300F091")
+        // }
         </script>
     </body>
 </html>
