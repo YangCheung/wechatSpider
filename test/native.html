@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" >
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="apple-mobile-web-app-capable" content="no">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>测试h5 开客户端</title>
+        <style type="text/css">
+            html,body{
+                max-width:750px;
+                margin: 0 auto;
+                text-align:center;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>浏览器中打开魔部</h3>
+<br>
+<br>
+<br>
+        <a href="mobu-web://external?target=http%3A%2F%2Fbaidu.com"> 直接使用sheme（Android 非Chrome浏览器） </a>
+<br>
+<br>
+<br>        
+
+
+        <button id="openNN">通过魔部打开baidu</button><br/>
+
+        <br>
+        <br> 
+        <button id="opencircle">打开魔部某个圈子</button><br/>
+
+        <br>
+        <br> 
+        <button id="share">显示分享按钮</button><br/>
+        
+        <script type="text/javascript" src="tool-nativeSchema.js?v=20160712"></script>
+        <script type="text/javascript">
+        document.querySelector("#openNN").addEventListener("click",function(){
+            var login = "login";
+            nativeSchema.loadSchema({
+                targetUrl: "http://baidu.com"
+            });
+        });
+
+        document.querySelector("#opencircle").addEventListener("click",function(){
+            var login = "login";
+            nativeSchema.loadSchema({
+                targetUrl: "mobu://circle/3389805"
+            });
+        });
+
+        document.querySelector("#share").addEventListener("click",function(){
+            share.enable("分享标题", "分享描述", "http://baidu.com")
+        });
+        </script>
+    </body>
+</html>
